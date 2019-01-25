@@ -10,6 +10,10 @@ ifeq ($(strip ${CFG_BOARDNAME}),"BCM96358")
 BSPOBJS +=               \
     dev_bcm6348_eth.o
 endif
+ifeq ($(strip ${CFG_BOARDNAME}),"BCM93380")
+BSPOBJS +=               \
+    dev_bcm6348_eth.o
+endif
 
 BSPOBJS +=               \
 	bcmmii.o			\

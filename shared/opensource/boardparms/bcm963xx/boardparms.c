@@ -1258,6 +1258,297 @@ static PBOARD_PARAMETERS g_BoardParms[] =
     {&g_bcm96358vw, &g_bcm96358vw16, &g_bcm96358gw, &g_bcm96358gw16, &g_bcm96358m, 0};
 #endif
 
+#if defined(_BCM93380_) || defined(CONFIG_BCM93380)
+
+static BOARD_PARAMETERS g_bcm93380vw =
+{
+    "93380VW",                              /* szBoardId */
+    {{BP_ENET_INTERNAL_PHY,                 /* ucPhyType */
+      0x01,                                 /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x01,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO,                  /* usConfigType */
+      BP_NOT_DEFINED},                      /* usReverseMii */
+     {BP_ENET_EXTERNAL_SWITCH,              /* ucPhyType */
+      0x0,                                  /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x03,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO_PSEUDO_PHY,       /* usConfigType */
+      BP_ENET_REVERSE_MII}},                /* usReverseMii */
+    {{BP_VOIP_NO_DSP},                      /* ucDspType */
+     {BP_VOIP_NO_DSP}},                     /* ucDspType */
+    BP_MEMORY_32MB_1_CHIP,                  /* usSdramSize */
+    BP_PSI_DEFAULT_SIZE,                    /* usPsiSize */
+    BP_NOT_DEFINED,                         /* usGpioRj11InnerPair */
+    BP_NOT_DEFINED,                         /* usGpioRj11OuterPair */
+    BP_NOT_DEFINED,                         /* usGpioPressAndHoldReset */
+    BP_NOT_DEFINED,                         /* usGpioUartRts */
+    BP_NOT_DEFINED,                         /* usGpioUartCts */
+    BP_NOT_DEFINED,                         /* usGpioLedAdsl */
+    BP_GPIO_15_AL,                          /* usGpioLedAdslFail */
+    BP_NOT_DEFINED,                         /* usGpioLedWireless */
+    BP_NOT_DEFINED,                         /* usGpioLedUsb */
+    BP_NOT_DEFINED,                         /* usGpioLedHpna */
+    BP_GPIO_22_AL,                          /* usGpioLedWanData */
+    BP_GPIO_22_AL,                          /* usGpioLedPpp */
+    BP_GPIO_23_AL,                          /* usGpioLedPppFail */
+    BP_GPIO_4_AL,                           /* usGpioLedBlPowerOn */
+    BP_GPIO_22_AL,                          /* usGpioLedBlResetCfg */
+    BP_GPIO_5_AL,                           /* usGpioLedBlStop */
+    BP_HW_DEFINED,                          /* usExtIntrAdslDyingGasp */
+    BP_NOT_DEFINED,                         /* usExtIntrHpna */
+    BP_NOT_DEFINED,                         /* usCsHpna */
+    BP_WLAN_ANT_MAIN,                       /* usAntInUseWireless */
+    BP_GPIO_37_AL,                          /* usGpioSesBtnWireless */
+    BP_EXT_INTR_3,                          /* usExtIntrSesBtnWireless */
+    BP_SERIAL_GPIO_7_AL,                    /* usGpioLedSesWireless */     
+    BP_NOT_DEFINED,                         /* usCsHpi */
+    BP_NOT_DEFINED,                         /* usVcopeResetGpio */
+    BP_NOT_DEFINED,                         /* usVcopeRelayGpio */
+    BP_NOT_DEFINED,                         /* usVcopeBoardRev */
+    1,                                      /* usCMTThead */
+};
+
+static BOARD_PARAMETERS g_bcm93380vw16 =
+{
+    "93380VW-16",                           /* szBoardId */
+    {{BP_ENET_INTERNAL_PHY,                 /* ucPhyType */
+      0x01,                                 /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x01,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO,                  /* usConfigType */
+      BP_NOT_DEFINED},                      /* usReverseMii */
+     {BP_ENET_EXTERNAL_SWITCH,              /* ucPhyType */
+      0x0,                                  /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x03,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO_PSEUDO_PHY,       /* usConfigType */
+      BP_ENET_REVERSE_MII}},                /* usReverseMii */
+    {{BP_VOIP_NO_DSP},                      /* ucDspType */
+     {BP_VOIP_NO_DSP}},                     /* ucDspType */
+    BP_MEMORY_16MB_1_CHIP,                  /* usSdramSize */
+    BP_PSI_DEFAULT_SIZE,                    /* usPsiSize */
+    BP_NOT_DEFINED,                         /* usGpioRj11InnerPair */
+    BP_NOT_DEFINED,                         /* usGpioRj11OuterPair */
+    BP_NOT_DEFINED,                         /* usGpioPressAndHoldReset */
+    BP_NOT_DEFINED,                         /* usGpioUartRts */
+    BP_NOT_DEFINED,                         /* usGpioUartCts */
+    BP_NOT_DEFINED,                         /* usGpioLedAdsl */
+    BP_GPIO_15_AL,                          /* usGpioLedAdslFail */
+    BP_NOT_DEFINED,                         /* usGpioLedWireless */
+    BP_NOT_DEFINED,                         /* usGpioLedUsb */
+    BP_NOT_DEFINED,                         /* usGpioLedHpna */
+    BP_GPIO_22_AL,                          /* usGpioLedWanData */
+    BP_GPIO_22_AL,                          /* usGpioLedPpp */
+    BP_GPIO_23_AL,                          /* usGpioLedPppFail */
+    BP_GPIO_4_AL,                           /* usGpioLedBlPowerOn */
+    BP_GPIO_22_AL,                          /* usGpioLedBlResetCfg */
+    BP_GPIO_5_AL,                           /* usGpioLedBlStop */
+    BP_HW_DEFINED,                          /* usExtIntrAdslDyingGasp */
+    BP_NOT_DEFINED,                         /* usExtIntrHpna */
+    BP_NOT_DEFINED,                         /* usCsHpna */
+    BP_WLAN_ANT_MAIN,                       /* usAntInUseWireless */
+    BP_GPIO_37_AL,                          /* usGpioSesBtnWireless */
+    BP_EXT_INTR_3,                          /* usExtIntrSesBtnWireless */
+    BP_SERIAL_GPIO_7_AL,                    /* usGpioLedSesWireless */     
+    BP_NOT_DEFINED,                         /* usCsHpi */
+    BP_NOT_DEFINED,                         /* usVcopeResetGpio */
+    BP_NOT_DEFINED,                         /* usVcopeRelayGpio */
+    BP_NOT_DEFINED,                         /* usVcopeBoardRev */
+    1,                                      /* usCMTThead */
+};
+
+static BOARD_PARAMETERS g_bcm93380gw =
+{
+    "93380GW",                              /* szBoardId */
+    {{BP_ENET_INTERNAL_PHY,                 /* ucPhyType */
+      0x01,                                 /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x01,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO,                  /* usConfigType */
+      BP_NOT_DEFINED},                      /* usReverseMii */
+     {BP_ENET_EXTERNAL_SWITCH,              /* ucPhyType */
+      0x0,                                  /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x03,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO_PSEUDO_PHY,       /* usConfigType */
+      BP_ENET_REVERSE_MII}},                /* usReverseMii */
+    {{BP_VOIP_NO_DSP},                      /* ucDspType */
+     {BP_VOIP_NO_DSP}},                     /* ucDspType */
+    BP_MEMORY_32MB_1_CHIP,                  /* usSdramSize */
+    BP_PSI_DEFAULT_SIZE,                    /* usPsiSize */
+    BP_NOT_DEFINED,                         /* usGpioRj11InnerPair */
+    BP_NOT_DEFINED,                         /* usGpioRj11OuterPair */
+    BP_NOT_DEFINED,                         /* usGpioPressAndHoldReset */
+    BP_NOT_DEFINED,                         /* usGpioUartRts */
+    BP_NOT_DEFINED,                         /* usGpioUartCts */
+    BP_NOT_DEFINED,                         /* usGpioLedAdsl */
+    BP_GPIO_15_AL,                          /* usGpioLedAdslFail */
+    BP_NOT_DEFINED,                         /* usGpioLedWireless */
+    BP_NOT_DEFINED,                         /* usGpioLedUsb */
+    BP_NOT_DEFINED,                         /* usGpioLedHpna */
+    BP_GPIO_22_AL,                          /* usGpioLedWanData */
+    BP_GPIO_22_AL,                          /* usGpioLedPpp */
+    BP_GPIO_23_AL,                          /* usGpioLedPppFail */
+    BP_GPIO_4_AL,                           /* usGpioLedBlPowerOn */
+    BP_GPIO_22_AL,                          /* usGpioLedBlResetCfg */
+    BP_GPIO_5_AL,                           /* usGpioLedBlStop */
+    BP_HW_DEFINED,                          /* usExtIntrAdslDyingGasp */
+    BP_NOT_DEFINED,                         /* usExtIntrHpna */
+    BP_NOT_DEFINED,                         /* usCsHpna */
+    BP_WLAN_ANT_MAIN,                       /* usAntInUseWireless */
+    BP_GPIO_37_AL,                          /* usGpioSesBtnWireless */
+    BP_EXT_INTR_3,                          /* usExtIntrSesBtnWireless */
+    BP_SERIAL_GPIO_7_AL,                    /* usGpioLedSesWireless */     
+    BP_NOT_DEFINED,                         /* usCsHpi */
+    BP_NOT_DEFINED,                         /* usVcopeResetGpio */
+    BP_NOT_DEFINED,                         /* usVcopeRelayGpio */
+    BP_NOT_DEFINED,                         /* usVcopeBoardRev */
+    0,                                      /* usCMTThead */
+};
+
+static BOARD_PARAMETERS g_bcm93380gw16 =
+{
+    "93380GW-16",                           /* szBoardId */
+    {{BP_ENET_INTERNAL_PHY,                 /* ucPhyType */
+      0x01,                                 /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x01,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO,                  /* usConfigType */
+      BP_NOT_DEFINED},                      /* usReverseMii */
+     {BP_ENET_EXTERNAL_SWITCH,              /* ucPhyType */
+      0x0,                                  /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x03,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO_PSEUDO_PHY,       /* usConfigType */
+      BP_ENET_REVERSE_MII}},                /* usReverseMii */
+    {{BP_VOIP_NO_DSP},                      /* ucDspType */
+     {BP_VOIP_NO_DSP}},                     /* ucDspType */
+    BP_MEMORY_16MB_1_CHIP,                  /* usSdramSize */
+    BP_PSI_DEFAULT_SIZE,                    /* usPsiSize */
+    BP_NOT_DEFINED,                         /* usGpioRj11InnerPair */
+    BP_NOT_DEFINED,                         /* usGpioRj11OuterPair */
+    BP_NOT_DEFINED,                         /* usGpioPressAndHoldReset */
+    BP_NOT_DEFINED,                         /* usGpioUartRts */
+    BP_NOT_DEFINED,                         /* usGpioUartCts */
+    BP_NOT_DEFINED,                         /* usGpioLedAdsl */
+    BP_GPIO_15_AL,                          /* usGpioLedAdslFail */
+    BP_NOT_DEFINED,                         /* usGpioLedWireless */
+    BP_NOT_DEFINED,                         /* usGpioLedUsb */
+    BP_NOT_DEFINED,                         /* usGpioLedHpna */
+    BP_GPIO_22_AL,                          /* usGpioLedWanData */
+    BP_GPIO_22_AL,                          /* usGpioLedPpp */
+    BP_GPIO_23_AL,                          /* usGpioLedPppFail */
+    BP_GPIO_4_AL,                           /* usGpioLedBlPowerOn */
+    BP_GPIO_22_AL,                          /* usGpioLedBlResetCfg */
+    BP_GPIO_5_AL,                           /* usGpioLedBlStop */
+    BP_HW_DEFINED,                          /* usExtIntrAdslDyingGasp */
+    BP_NOT_DEFINED,                         /* usExtIntrHpna */
+    BP_NOT_DEFINED,                         /* usCsHpna */
+    BP_WLAN_ANT_MAIN,                       /* usAntInUseWireless */
+    BP_GPIO_37_AL,                          /* usGpioSesBtnWireless */
+    BP_EXT_INTR_3,                          /* usExtIntrSesBtnWireless */
+    BP_SERIAL_GPIO_7_AL,                    /* usGpioLedSesWireless */     
+    BP_NOT_DEFINED,                         /* usCsHpi */
+    BP_NOT_DEFINED,                         /* usVcopeResetGpio */
+    BP_NOT_DEFINED,                         /* usVcopeRelayGpio */
+    BP_NOT_DEFINED,                         /* usVcopeBoardRev */
+    0,                                      /* usCMTThead */
+};
+
+static BOARD_PARAMETERS g_bcm93380m =
+{
+    "93380M",                               /* szBoardId */
+    {{BP_ENET_INTERNAL_PHY,                 /* ucPhyType */
+      0x01,                                 /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x01,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO,                  /* usConfigType */
+      BP_NOT_DEFINED},                      /* usReverseMii */
+     {BP_ENET_EXTERNAL_SWITCH,              /* ucPhyType */
+      0x0,                                  /* ucPhyAddress */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSck */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiSs */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMosi */
+      BP_NOT_DEFINED,                       /* usGpioPhySpiMiso */
+      BP_NOT_DEFINED,                       /* usGpioPhyReset */
+      0x03,                                 /* numSwitchPorts */
+      BP_ENET_CONFIG_MDIO_PSEUDO_PHY,       /* usConfigType */
+      BP_ENET_REVERSE_MII}},                /* usReverseMii */
+    {{BP_VOIP_NO_DSP},                      /* ucDspType */
+     {BP_VOIP_NO_DSP}},                     /* ucDspType */
+    BP_MEMORY_32MB_1_CHIP,                  /* usSdramSize */
+    BP_PSI_DEFAULT_SIZE,                    /* usPsiSize */
+    BP_NOT_DEFINED,                         /* usGpioRj11InnerPair */
+    BP_NOT_DEFINED,                         /* usGpioRj11OuterPair */
+    BP_NOT_DEFINED,                         /* usGpioPressAndHoldReset */
+    BP_NOT_DEFINED,                         /* usGpioUartRts */
+    BP_NOT_DEFINED,                         /* usGpioUartCts */
+    BP_NOT_DEFINED,                         /* usGpioLedAdsl */
+    BP_SERIAL_GPIO_5_AL,                    /* usGpioLedAdslFail */
+    BP_NOT_DEFINED,                         /* usGpioLedWireless */
+    BP_NOT_DEFINED,                         /* usGpioLedUsb */
+    BP_NOT_DEFINED,                         /* usGpioLedHpna */
+    BP_SERIAL_GPIO_2_AL,                    /* usGpioLedWanData */
+    BP_SERIAL_GPIO_2_AL,                    /* usGpioLedPpp */
+    BP_SERIAL_GPIO_3_AL,                    /* usGpioLedPppFail */
+    BP_SERIAL_GPIO_0_AL,                    /* usGpioLedBlPowerOn */
+    BP_SERIAL_GPIO_2_AL,                    /* usGpioLedBlResetCfg */
+    BP_SERIAL_GPIO_1_AL,                    /* usGpioLedBlStop */
+    BP_HW_DEFINED,                          /* usExtIntrAdslDyingGasp */
+    BP_NOT_DEFINED,                         /* usExtIntrHpna */
+    BP_NOT_DEFINED,                         /* usCsHpna */
+    BP_WLAN_ANT_MAIN,                       /* usAntInUseWireless */
+    BP_GPIO_37_AL,                          /* usGpioSesBtnWireless */
+    BP_EXT_INTR_3,                          /* usExtIntrSesBtnWireless */
+    BP_GPIO_11_AL,                          /* usGpioLedSesWireless */ 
+    BP_CS_1,                                /* usCsHpi */
+    BP_GPIO_9_AL,                           /* usVcopeResetGpio */
+    BP_GPIO_10_AL,                          /* usVcopeRelayGpio */
+    3,                                      /* usVcopeBoardRev */
+    0,                                      /* usCMTThead */
+};
+
+static PBOARD_PARAMETERS g_BoardParms[] =
+    {&g_bcm93380vw, &g_bcm93380vw16, &g_bcm93380gw, &g_bcm93380gw16, &g_bcm93380m, 0};
+#endif
+
 static PBOARD_PARAMETERS g_pCurrentBp = 0;
 
 /**************************************************************************

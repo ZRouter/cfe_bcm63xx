@@ -72,7 +72,11 @@
 #define CFG_FATFS               0
 #define CFG_UI                  1      /* Define to enable user interface */
 
+#if defined(_BCM93380_)
+#define CFG_MULTI_CPUS          1      /* multi-cpu support */
+#else
 #define CFG_MULTI_CPUS          0      /* no multi-cpu support */
+#endif
 
 #define CFG_HEAP_SIZE           1024   /* heap size in kilobytes */
 

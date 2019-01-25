@@ -11,6 +11,11 @@ BSPOBJS +=               \
 	 bcm6358_rom_boot.o \
 	 sdramDqs.o
 endif
+ifeq ($(strip ${CFG_BOARDNAME}),"BCM93380")
+BSPOBJS +=               \
+	 bcm3380_rom_boot.o \
+	 sdramDqs.o
+endif
 
 BSPOBJS +=           \
 	 bcm63xx_main.o

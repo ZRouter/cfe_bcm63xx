@@ -40,11 +40,12 @@ BSPOBJS += flashimg.o
 CRTIOBJS = /opt/toolchains/uclibc-crosstools/mips-linux/lib/crti.o
 
 ALL : sanity_check cfe$(BRCM_CHIP)
-	gcc  -o ${HOSTTOOLS}/addvtoken -I ${INC_SHARED_PUB_PATH} -I/usr/include  ${HOSTTOOLS}/addvtoken.c
-	@if [ $(shell find . -name cfe$(BRCM_CHIP).bin -printf '%s\n') -le 65536 ] ; then \
+	$(CC)  -o ${HOSTTOOLS}/addvtoken -I ${INC_SHARED_PUB_PATH} -I/usr/include  ${HOSTTOOLS}/addvtoken.c
+	$(eval BINSIZE := $(shell ls -l cfe$(BRCM_CHIP).bin | awk '{print $$5}'))
+	@if [ $(BINSIZE) -le 65536 ] ; then \
 		${HOSTTOOLS}/addvtoken cfe$(BRCM_CHIP).bin bcm9$(BRCM_CHIP)_cfe.w; \
 	else \
-		find . -name cfe$(BRCM_CHIP).bin -printf '\nERROR: cfe.bin size, %s, is greater than 65536 maximum size.\n'; \
+		echo "ERROR: cfe.bin size, $(BINSIZE), is greater than 65536 maximum size." ; \
 		rm cfe$(BRCM_CHIP) cfe$(BRCM_CHIP).bin; \
 	fi
 	@echo done

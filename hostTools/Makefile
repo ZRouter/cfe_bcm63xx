@@ -34,7 +34,8 @@ TOPDIR	:= $(shell /bin/pwd)
 SSHD_DIR = $(OPENSOURCE_DIR)/sshd
 GENKEY_DIR = $(SSHD_DIR)/genkey
 HOST_GENKEY = $(TOPDIR)/host_genkey
-CC = gcc
+CC = cc
+CXX = c++
 STRIP = strip
 RSA_KEY = $(TARGETS_DIR)/fs.src/etc/rsa_host_key
 ###DSS_KEY = $(TARGETS_DIR)/fs.src/etc/dss_host_key
@@ -56,11 +57,11 @@ endif
 build_imageutil: bcmImageBuilder addvtoken createimg
 
 bcmImageBuilder: bcmImageBuilder.c
-	gcc $(CFLAGS) -o bcmImageBuilder bcmImageBuilder.c
+	$(CC) $(CFLAGS) -o bcmImageBuilder bcmImageBuilder.c
 addvtoken: addvtoken.c
-	gcc $(CFLAGS) -o addvtoken addvtoken.c 
+	$(CC) $(CFLAGS) -o addvtoken addvtoken.c 
 createimg: createimg.c $(INC_BRCMBOARDPARMS_PATH)/$(BRCM_BOARD)/boardparms.c
-	gcc $(CFLAGS) -DCONFIG_BCM9$(BRCM_CHIP) -o createimg createimg.c $(INC_BRCMBOARDPARMS_PATH)/$(BRCM_BOARD)/boardparms.c
+	$(CC) $(CFLAGS) -DCONFIG_BCM9$(BRCM_CHIP) -o createimg createimg.c $(INC_BRCMBOARDPARMS_PATH)/$(BRCM_BOARD)/boardparms.c
 
 ifeq ($(strip $(BRCM_KERNEL_ROOTFS)),squashfs)
 build_mkfs: mksquashfs $(LZMAOBJS)
@@ -76,8 +77,8 @@ mksquashfs:  squashfs/*.c squashfs/*.h $(LZMAOBJS)
           echo *****You may find it in your Linux distribution CDs. ; \
 	  exit ;\
         fi
-	gcc $(CFLAGS) -Isquashfs -c squashfs/*.c
-	g++ -m32 -o mksquashfs mksquashfs.o read_fs.o sort.o $(LZMAOBJS) -lz
+	$(CC) $(CFLAGS) -Isquashfs -c squashfs/*.c
+	$(CXX) -m32 -o mksquashfs mksquashfs.o read_fs.o sort.o $(LZMAOBJS) -lz
 
 mkcramfs:  cramfs/mkcramfs.cpp $(LZMAOBJS)
 	@if [ ! -e /usr/include/zlib.h ]; then \
@@ -85,14 +86,14 @@ mkcramfs:  cramfs/mkcramfs.cpp $(LZMAOBJS)
           echo *****You may find it in your Linux distribution CDs. ; \
 	  exit ;\
         fi
-	g++ $(CFLAGS) -I$(KERNEL_DIR)/include -c cramfs/mkcramfs.cpp
-	g++ -m32 -o mkcramfs mkcramfs.o $(LZMAOBJS) -lz -lm
+	$(CXX) $(CFLAGS) -I$(KERNEL_DIR)/include -c cramfs/mkcramfs.cpp
+	$(CXX) -m32 -o mkcramfs mkcramfs.o $(LZMAOBJS) -lz -lm
 
 build_cmplzma: cmplzma $(LZMAOBJS)
 
 cmplzma: cmplzma.cpp $(LZMAOBJS)
-	g++ $(CFLAGS) -c cmplzma.cpp
-	g++ -m32 -o cmplzma cmplzma.o $(LZMAOBJS) -lm
+	$(CXX) $(CFLAGS) -c cmplzma.cpp
+	$(CXX) -m32 -o cmplzma cmplzma.o $(LZMAOBJS) -lm
 
 
 ifeq ($(strip $(BUILD_CFM_SSHD)),y)
@@ -131,7 +132,7 @@ build_hostgenkey:
 endif
 
 $(LZMAOBJS): %.o: %.cpp
-	g++ -c $(CFLAGS) $^ -o $@
+	$(CXX) -c $(CFLAGS) $^ -o $@
 
 clean:
 	rm -f bcmImageBuilder addvtoken createimg mksquashfs mkcramfs cmplzma $(HOST_GENKEY)

@@ -47,7 +47,7 @@ extern "C" {
 #define IMAGE_BASE          (0xA0000000 | 0x1FC00000)
 
 /* Some chips support alternative boot vector */
-#if defined(_BCM96348_) || defined(CONFIG_BCM96348) || defined(_BCM96358_) || defined(CONFIG_BCM96358)
+#if defined(_BCM96348_) || defined(CONFIG_BCM96348) || defined(_BCM96358_) || defined(CONFIG_BCM96358) || defined(_BCM93380_)
 #define FLASH_BASE          (0xA0000000 | (MPI->cs[0].base & 0xFFFFFF00))
 #define BOOT_OFFSET         (FLASH_BASE - IMAGE_BASE)
 #else

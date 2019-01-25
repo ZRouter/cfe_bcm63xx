@@ -95,6 +95,9 @@ const cfe_driver_t bcm6348_enet = {
 #if defined (_BCM96358_)
     "BCM6358 Ethernet",
 #endif
+#if defined (_BCM93380_)
+    "BCM3380 Ethernet",
+#endif
     "eth",
     CFE_DEV_NETWORK,
     &bcm6348_ether_dispatch,

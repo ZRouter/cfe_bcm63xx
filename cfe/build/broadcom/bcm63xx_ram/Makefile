@@ -50,7 +50,7 @@ ALL: sanity_check $(HOSTTOOLS)/$(COMPRESS)
 
 sanity_check:
 	@if [ "$(BRCM_CHIP)" = "" ]; then \
-          echo You must specify chip ID using 'gmake BRCM_CHIP=[6338|6348|6358]'; exit 1; \
+          echo You must specify chip ID using 'gmake BRCM_CHIP=[6338|6348|6358|3380]'; Exit 1; \
 	fi
 
 $(ASM_FILE): cfe$(BRCM_CHIP) cfe$(BRCM_CHIP).bin

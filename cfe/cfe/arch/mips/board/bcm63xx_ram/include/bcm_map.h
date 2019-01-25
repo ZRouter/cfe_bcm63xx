@@ -25,6 +25,10 @@
 #if defined (_BCM96358_)
 #include "6358_map.h"
 #endif
+#if defined (_BCM93380_)
+#include "3380_map.h"
+#endif
+
 
 extern void AlertLed_On(void);//roy
 extern void AlertLed_Off(void);//roy

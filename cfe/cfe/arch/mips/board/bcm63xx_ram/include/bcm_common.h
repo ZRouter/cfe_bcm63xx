@@ -25,5 +25,8 @@
 #if defined (_BCM96358_)
 #include "6358_common.h"
 #endif
+#if defined (_BCM93380_)
+#include "3380_common.h"
+#endif
 
 #endif
