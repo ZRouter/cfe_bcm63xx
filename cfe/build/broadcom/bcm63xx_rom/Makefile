@@ -52,7 +52,7 @@ ALL : sanity_check cfe$(BRCM_CHIP)
 
 sanity_check:
 	@if [ "$(BRCM_CHIP)" = "" ]; then \
-          echo You must specify chip ID using 'gmake BRCM_CHIP=[6338|6348|6358]'; exit 1; \
+          echo You must specify chip ID using 'gmake BRCM_CHIP=[6338|6348|6358|3380]'; exit 1; \
 	fi
 
 mksbp: ALL

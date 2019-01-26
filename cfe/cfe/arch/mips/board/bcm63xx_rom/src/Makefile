@@ -13,8 +13,7 @@ BSPOBJS +=               \
 endif
 ifeq ($(strip ${CFG_BOARDNAME}),"BCM93380")
 BSPOBJS +=               \
-	 bcm3380_rom_boot.o \
-	 sdramDqs.o
+	 bcm3380_rom_boot.o
 endif
 
 BSPOBJS +=           \

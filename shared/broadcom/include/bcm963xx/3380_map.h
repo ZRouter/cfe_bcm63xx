@@ -37,107 +37,62 @@ extern "C" {
 #define LtoP( x )       ( (uint32)x & 0x1fffffff )
 #define PtoL( x )       ( LtoP(x) | 0xa0000000 )
 
-typedef struct MemoryControl
+typedef struct MemControllerRegs
 {
-    uint32 Control;             /* (00) */
-#define MEMC_SELF_REFRESH    (1<<6) // enable self refresh mode
-#define MEMC_MRS             (1<<4) // generate a mode register select cycle
-#define MEMC_PRECHARGE       (1<<3) // generate a precharge cycle
-#define MEMC_REFRESH         (1<<2) // generate an auto refresh cycle
-#define MEMC_SEQUENCE_ENABLE (1<<1) // enable memory controller sequencer
-#define MEMC_MASTER_ENABLE   (1<<0) // enable accesses to external sdram
+    uint32  CS_Control[0x40];    // 000 - The CS control registers will be set in the bootloader.
 
-    uint32  Config;             /* (04) */
-#define MEMC_SYS_PORT_CMD_MODE  (1<<18)
-#define MEMC_PAD_OP_MODE        (1<<17)
-#define MEMC_DQS_GATE_EN        (1<<16)
-#define MEMC_PRED_RD_STROBE_EN  (1<<15)
-#define MEMC_PRED_RD_LATENCY_SEL (1<<14)
-#define MEMC_MIPS1HIPREN        (1<<11)
-#define MEMC_MIPS0HIPREN        (1<<10)
-#define MEMC_HIPRRTYQEN         (1<<9)
-#define MEMC_UBUS_CLF_EN        (1<<8)
+    uint32  InitControl;        // 100 - This is the DDR command register.
+        #define MEMC_CMD_EMRS       0x00  // Write the extended mode register (EMR) (BA[1:0]=2'b01)
+        #define MEMC_CMD_MRS        0x01  // Write the mode register (MR) (BA[1:0]=2'b00)
+        #define MEMC_CMD_PRE        0x02  // Precharge all banks command
+        #define MEMC_CMD_AR         0x03  // Auto Refresh command
+        #define MEMC_CMD_SET_SREF   0x04  // Set Self-Refresh
+        #define MEMC_CMD_CLR_SREF   0x05  // Clear Self-Refresh
+        #define MEMC_CMD_SET_PDN    0x06  // Set power-down, results in CKE being reset
+        #define MEMC_CMD_CLR_PDN    0x07  // Clear power-down, results in CKE being set
+        #define MEMC_CMD_EMRS2      0x08  // Write the extended mode2 register (EMR2) (BA[1:0]=2'b10)
+        #define MEMC_CMD_EMRS3      0x09  // Write the extended mode3 register (EMR3) (BA[1:0]=2'b11)
+        #define MEMC_CMD_SET_IDLE   0x0a  // Turn off DDR Pads (Based on DDR_PHY IDDQ Settings)
+        #define MEMC_CMD_CLR_IDLE   0x0b  // Turn on DDR Pads  (Need to wait for 10ns)
+        #define MEMC_CMD_UPDT_SVDL  0x0c  // Update Static VDL (one calibration cycle)
+        #define MEMC_CMD_Reserved   0x0d  // Reserved
+        #define MEMC_CMD_SET_DVDL   0x0e  // Switch to Dynamic VDL values
+        #define MEMC_CMD_CLR_DVDL   0x0f  // Switch back to Static VDL values
+        #define MEMC_CMD_CS0        (1 << 4)
+        #define MEMC_CMD_CS1        (1 << 5)
+        #define MEMC_SELF_REFRESH   (MEMC_CMD_CS0 | MEMC_CMD_CS1 | MEMC_CMD_SET_SREF) // enable self refresh mode
 
-#define MEMC_11_BIT_ROW         (0<<6)
-#define MEMC_12_BIT_ROW         (1<<6)
-#define MEMC_13_BIT_ROW         (2<<6)
-#define MEMC_14_BIT_ROW         (3<<6)
+    uint32  Mode0;                  // 104
+    uint32  Mode1;                  // 108
+    uint32  Refresh;                // 10c
+    uint32  ODT;                    // 110
+    uint32  Timing0;                // 114
+    uint32  Timing1;                // 118
+    uint32  Timing2;                // 11c
+    uint32  CRC;                    // 120
+    uint32  OutCRC;                 // 124
+    uint32  InCRC;                  // 128
+    uint8   unused[0x800 - 0x12c];  // 12c
 
-#define MEMC_8_BIT_COL          (0<<3)
-#define MEMC_9_BIT_COL          (1<<3)
-#define MEMC_10_BIT_COL         (2<<3)
-#define MEMC_11_BIT_COL         (3<<3)
+    uint32  GlobalConfig;           // 800
+    uint32  LbistConfig;            // 804
+    uint32  LbistSeed;              // 808
+    uint32  Arbitor;                // 80c
+    uint32  PIGlobalControl;        // 810
+    uint32  PIUbusControl;          // 814
+    uint32  PIMipsControl;          // 818
+    uint32  PIDslMipsControl;       // 81c
+    uint32  PIDslPhyControl;        // 820
+    uint32  PIUbusPhase;            // 824
+    uint32  PIMipsPhase;            // 828
+    uint32  PIDslMipsPhase;         // 82c
+    uint32  PIDslPhyPhase;          // 830
+    uint32  PIUbusSample;           // 834
 
-#define MEMC_SEL_PRIORITY       (1<<2)
+} MemControllerRegs;
 
-#define MEMC_32BIT_BUS          (0<<1)
-#define MEMC_16BIT_BUS          (1<<1)
+#define MEMC ((volatile MemControllerRegs * const) MEMC_BASE)
 
-#define MEMC_MEMTYPE_SDR        (0<<0)
-#define MEMC_MEMTYPE_DDR        (1<<0)
-
-    uint32  RefreshPdControl;   /* (08) */ 
-    uint32  BistStatus;         /* (0C) */
-    uint32  ExtendedModeBuffer; /* (10) */
-    uint32  BankClosingTimer;   /* (14) */
-    uint32  PriorityInversionTimer; /* (18) */
-
-    uint32  DramTiming;         /* (1c) */
-#define MEMC_WR_NOP_RD        (1<<23)
-#define MEMC_WR_NOP_WR        (1<<22)
-#define MEMC_RD_NOP_WR        (1<<21)
-#define MEMC_RD_NOP_RD        (1<<20)
-#define MEMC_CAS_LATENCY_2    (0)
-#define MEMC_CAS_LATENCY_2_5  (1)
-#define MEMC_CAS_LATENCY_3    (2)
-
-    uint32  IntStatus;          /* (20) */
-    uint32  IntMask;            /* (24) */
-#define MEMC_INT3             (1<<3)
-#define MEMC_INT2             (2<<3)
-#define MEMC_INT1             (1<<3)
-#define MEMC_INT0             (0<<3)
-
-    uint32  IntInfo;            /* (28) */
-    uint8   unused5[0x50-0x2c]; /* (2c) */
-    uint32  Barrier;            /* (50) */
-    uint32  CoreId;             /* (54) */
-} MemoryControl;
-
-#define MEMC ((volatile MemoryControl * const) MEMC_BASE)
-
-typedef struct DDRControl {
-    uint32 RevID;
-    uint32 PadSSTLMode;
-    uint32 CmdPadCntl;
-    uint32 DQPadCntl;
-    uint32 DQSPadCntl;
-    uint32 ClkPadCntl0;
-    uint32 MIPSDDRPLLConfig;
-#define MIPSDDR_N2_SHFT         29
-#define MIPSDDR_N2_MASK         (0x7<<MIPSDDR_N2_SHFT)
-#define MIPSDDR_N1_SHFT         23
-#define MIPSDDR_N1_MASK         (0x3f<<MIPSDDR_N1_SHFT)
-#define DDR_MDIV_SHFT           8
-#define DDR_MDIV_MASK           (0xff<<DDR_MDIV_SHFT)
-#define MIPS_MDIV_SHFT          0
-#define MIPS_MDIV_MASK          (0xff<<MIPS_MDIV_SHFT)
-
-    uint32 PLLDeskew;
-    uint32 MIPSPhaseCntl;
-    uint32 DDR1_2PhaseCntl0;
-    uint32 DDR3_4PhaseCntl0;
-    uint32 VCDLPhaseCntl;
-    uint32 Misc;
-    uint32 Spare0;
-    uint32 Spare1;
-    uint32 Spare2;
-    uint32 CLBist;
-    uint32 LBistCRC;
-} DDRControl;
-
-#define DDR ((volatile DDRControl * const) DDR_BASE)
-    
 /*
 ** Peripheral Controller
 */

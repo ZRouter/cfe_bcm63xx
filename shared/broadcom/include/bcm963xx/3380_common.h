@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 #define MEMC_BASE            0x12000000  /* Memory control registers */
-#define DDR_BASE             0x120000a0  /* DDR IO Buf Control registers */
+#define DDR_BASE             0x12000000  /* DDR IO Buf Control registers */
 #define PERF_BASE            0x14e00000  /* chip control registers */
 #define GPIO_BASE            0x14e00100  /* gpio registers */
 #define UART_BASE            0x14e00200  /* uart registers */
