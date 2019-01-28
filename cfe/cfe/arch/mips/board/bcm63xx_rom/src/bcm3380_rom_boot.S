@@ -141,17 +141,8 @@ END(board_draminfo)
     *  	   can use all registers.
     ********************************************************************* */
 LEAF(board_draminit)
-        li      sp, 0xfff84000                  # for now use the buffer manager memory for stack
-        sub     sp, 4
-        sw      ra, 0(sp)
 
-        .set    noreorder
-
-/* Todo: BCM3380 DDR initialize */
-
-        lw      ra, 0(sp)
-        add     sp, 4
-        j       ra
+#error "need board_draminit code"
 
 END(board_draminit)
 
